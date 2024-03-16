@@ -22,7 +22,7 @@ name = info.get('longName')
 st.write(ticker+ " - " + name)
 
 data = yf.download(ticker,start,end)
-st.dataframe(data,width=1800,height=600)
+#st.dataframe(data,width=1800,height=600)
 
 
 df = pd.DataFrame(data)
@@ -65,6 +65,13 @@ fig = px.line(x=df.index, y=df['Close'], title="Closing Price")
 fig.update_layout(xaxis_title='Data', yaxis_title="price")
 fig.add_scatter(x=df.index, y=df['30_mean'], mode='lines', name='Średnia ruchoma 20-dniowa')
 fig.add_scatter(x=df.index, y=df['10_mean'], mode='lines', name='Średnia ruchoma 10-dniowa')
+fig.update_layout(legend=dict(
+    orientation="h",
+    yanchor="bottom",
+    y=1.02,
+    xanchor="right",
+    x=1
+))
 st.plotly_chart(fig, use_container_width=True)
 
 #RSI
@@ -73,18 +80,5 @@ fig_rsi.update_layout(xaxis_title='Data', yaxis_title="RSI")
 fig_rsi.add_hline(y=30, line_dash="dash", line_color="green")
 fig_rsi.add_hline(y=70, line_dash="dash", line_color="red")
 st.plotly_chart(fig_rsi, use_container_width=True)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
